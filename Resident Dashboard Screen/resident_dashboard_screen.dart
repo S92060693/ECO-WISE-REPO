@@ -555,6 +555,132 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+ // ============================================================
+  // ACTIVITIES SCREEN
+  // ============================================================
+
+  Widget _buildActivitiesScreen() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
+        children: [
+          const Text(
+            'Activities',
+
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
+          _activityCard(
+            icon: Icons.delete_outline,
+            title: 'Garbage Collection',
+            subtitle: 'Organic waste collection request',
+            date: 'Today, 10:30 AM',
+          ),
+
+          const SizedBox(height: 12),
+
+          _activityCard(
+            icon: Icons.local_shipping_outlined,
+            title: 'Collection Scheduled',
+            subtitle: 'Truck scheduled for tomorrow',
+            date: 'Yesterday, 4:20 PM',
+          ),
+
+          const SizedBox(height: 12),
+
+          _activityCard(
+            icon: Icons.check_circle_outline,
+            title: 'Request Completed',
+            subtitle: 'Plastic waste collected',
+            date: '12 Oct 2026',
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ============================================================
+  // ACTIVITY CARD
+  // ============================================================
+
+  Widget _activityCard({
+    required IconData icon,
+    required String title,
+    required String subtitle,
+    required String date,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+
+      decoration: BoxDecoration(
+        color: cardBackgroundColor,
+
+        borderRadius: BorderRadius.circular(12),
+      ),
+
+      child: Row(
+        children: [
+          Container(
+            width: 50,
+            height: 50,
+
+            decoration: BoxDecoration(
+              color: primaryGreen,
+
+              borderRadius: BorderRadius.circular(12),
+            ),
+
+            child: Icon(icon, color: primaryYellow, size: 28),
+          ),
+
+          const SizedBox(width: 14),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Text(
+                  title,
+
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+
+                const SizedBox(height: 4),
+
+                Text(
+                  subtitle,
+
+                  style: const TextStyle(fontSize: 13, color: Colors.black54),
+                ),
+
+                const SizedBox(height: 4),
+
+                Text(
+                  date,
+
+                  style: const TextStyle(fontSize: 11, color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   // ============================================================
   // ACCOUNT SCREEN
@@ -617,4 +743,156 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ),
     );
   }
+
+  // ============================================================
+  // ACCOUNT OPTION
+  // ============================================================
+
+  Widget _accountOption({
+    required IconData icon,
+    required String title,
+    bool isLogout = false,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+
+      decoration: BoxDecoration(
+        color: cardBackgroundColor,
+
+        borderRadius: BorderRadius.circular(12),
+      ),
+
+      child: ListTile(
+        leading: Icon(icon, color: isLogout ? Colors.red : primaryGreen),
+
+        title: Text(
+          title,
+
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+
+            color: isLogout ? Colors.red : Colors.black,
+          ),
+        ),
+
+        trailing: Icon(Icons.chevron_right, color: Colors.grey.shade600),
+
+        onTap: () {
+          // ========================================================
+          // LOGOUT
+          // ========================================================
+
+          if (isLogout) {
+            showDialog(
+              context: context,
+
+              barrierDismissible: false,
+
+              builder: (BuildContext dialogContext) {
+                return AlertDialog(
+                  backgroundColor: Colors.white,
+
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+
+                  title: const Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF073D36),
+                    ),
+                  ),
+
+                  content: const Text(
+                    'Are you sure you want to logout from ECO WISE?',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black87,
+                      height: 1.4,
+                    ),
+                  ),
+
+                  actionsPadding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    bottom: 14,
+                  ),
+
+                  actions: [
+                    // ==============================================
+                    // CANCEL BUTTON
+                    // ==============================================
+
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(dialogContext);
+                      },
+
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(
+                          color: Color(0xFF073D36),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+
+                    // ==============================================
+                    // YES BUTTON
+                    // ==============================================
+                    ElevatedButton(
+                      onPressed: () {
+                        // Close confirmation dialog
+                        Navigator.pop(dialogContext);
+
+                        // Go to Login Screen
+                        Navigator.pushAndRemoveUntil(
+                          context,
+
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+
+                          // Remove Dashboard and all previous screens
+                          (route) => false,
+                        );
+                      },
+
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF073D36),
+
+                        foregroundColor: const Color(0xFFFFB333),
+
+                        elevation: 0,
+
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+
+                      child: const Text(
+                        'Yes',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
+          // ========================================================
+          // OTHER ACCOUNT OPTIONS
+          // ========================================================
+          else {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text('$title selected')));
+          }
+        },
+      ),
+    );
+  }
+
 }
