@@ -191,7 +191,79 @@ class _DashboardScreenState extends State<DashboardScreen> {
           // ======================================================
           // CATEGORIES GRID
           // ======================================================
+            GridView.builder(
+            shrinkWrap: true,
 
+            physics: const NeverScrollableScrollPhysics(),
+
+            itemCount: categories.length,
+
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 0.82,
+            ),
+
+            itemBuilder: (context, index) {
+              final category = categories[index];
+
+              return Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: cardBackgroundColor,
+
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+
+                      child: Center(
+                        child: Image.asset(
+                          category['iconPath']!,
+
+                          width: 40,
+                          height: 40,
+
+                          fit: BoxFit.contain,
+
+                          errorBuilder: (context, error, stackTrace) {
+                            return Icon(
+                              Icons.category,
+
+                              color: primaryGreen,
+
+                              size: 32,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 5),
+
+                  Text(
+                    category['title']!,
+
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+
+                    textAlign: TextAlign.center,
+
+                    maxLines: 1,
+
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              );
+            },
+          ),
+
+          const SizedBox(height: 20),
           // ======================================================
           // SEARCH BAR
           // ======================================================
