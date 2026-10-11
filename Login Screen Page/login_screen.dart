@@ -14,7 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
-        
+
   // ============================================================
   // CONTROLLERS
   // ============================================================
@@ -24,3 +24,16 @@ class _LoginScreenState extends State<LoginScreen>
 
   final TextEditingController passwordController =
       TextEditingController();
+ // ============================================================
+  // VARIABLES
+  // ============================================================
+
+  bool obscurePassword = true;
+
+  bool isLoading = false;
+
+  // ============================================================
+  // LOADING ANIMATION CONTROLLER
+  // ============================================================
+
+  late AnimationController loadingController;
