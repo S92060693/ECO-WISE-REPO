@@ -46,6 +46,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
         super.dispose();
     }
 
+    // ============================================================
+    // ACTION HANDLERS
+    // ============================================================
+
+  void onNewInquiry() {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('New Inquiry selected')));
+  }
+
+
 
   // ============================================================
   // BUILD
@@ -230,7 +240,49 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
           const SizedBox(height: 20),
 
+          // ======================================================
+          // ACTION BUTTONS
+          // ======================================================
+          Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: 68,
+
+                  child: ElevatedButton.icon(
+                    onPressed: onNewInquiry,
+
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryYellow,
+
+                      foregroundColor: Colors.black,
+
+                      elevation: 0,
+
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+
+                    icon: const Icon(Icons.add, size: 25, color: Colors.black),
+
+                    label: const Text(
+                      'New Inquiry',
+
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              const SizedBox(width: 12),
+            ]
+
         ]
+        
       )
     )
   }
