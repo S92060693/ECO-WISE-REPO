@@ -55,6 +55,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         .showSnackBar(const SnackBar(content: Text('New Inquiry selected')));
   }
 
+  void onComplain() {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('Complain selected')));
+  }
 
 
   // ============================================================
@@ -279,8 +283,48 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
 
               const SizedBox(width: 12),
-            ]
 
+              Expanded(
+                child: SizedBox(
+                  height: 68,
+
+                  child: ElevatedButton.icon(
+                    onPressed: onComplain,
+
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryYellow,
+
+                      foregroundColor: Colors.black,
+
+                      elevation: 0,
+
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+
+                    icon: const Icon(
+                      Icons.error_outline,
+                      size: 25,
+                      color: Colors.black,
+                    ),
+
+                    label: const Text(
+                      'Complain',
+
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 20),
+  
         ]
         
       )
