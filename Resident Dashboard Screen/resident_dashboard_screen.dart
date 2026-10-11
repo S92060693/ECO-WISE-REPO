@@ -36,6 +36,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ];
 
 
+    // ============================================================
+    // DISPOSE
+    // ============================================================
+
+    @override
+    void dispose() {
+        searchController.dispose();
+        super.dispose();
+    }
+
+
   // ============================================================
   // BUILD
   // ============================================================
@@ -138,4 +149,90 @@ class _DashboardScreenState extends State<DashboardScreen> {
       // ==========================================================
       body: SafeArea(child: _buildSelectedScreen()),
 
+    // ============================================================
+  // HOME SCREEN
+  // ============================================================
+
+  Widget _buildHomeScreen() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+
+      child: Column(
+        children: [
+          // ======================================================
+          // CATEGORIES GRID
+          // ======================================================
+
+          // ======================================================
+          // SEARCH BAR
+          // ======================================================
+          SizedBox(
+            height: 48,
+
+            child: TextField(
+              controller: searchController,
+
+              style: const TextStyle(fontSize: 16, color: Colors.black),
+
+              decoration: InputDecoration(
+                hintText: 'Search...',
+
+                hintStyle: const TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFFB0B0B0),
+                ),
+
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 0,
+                ),
+
+                filled: true,
+
+                fillColor: Colors.white,
+
+                suffixIcon: const Icon(
+                  Icons.search,
+
+                  color: Color(0xFFB0B0B0),
+
+                  size: 24,
+                ),
+
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+
+                  borderSide: const BorderSide(
+                    color: Color(0xFFD0D0D0),
+
+                    width: 1.2,
+                  ),
+                ),
+
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+
+                  borderSide: const BorderSide(
+                    color: Color(0xFFD0D0D0),
+
+                    width: 1.2,
+                  ),
+                ),
+
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+
+                  borderSide: BorderSide(color: primaryGreen, width: 1.5),
+                ),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
+        ]
+      )
+    )
+  }
+  }
 }
