@@ -60,6 +60,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
         .showSnackBar(const SnackBar(content: Text('Complain selected')));
   }
 
+    void onMoreDetails() {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text('More details selected')));
+  }
+
 
   // ============================================================
   // BUILD
