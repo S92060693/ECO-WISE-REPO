@@ -645,3 +645,119 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 }
+
+// ================================================================
+// 4 DOT ROTATING LOADING ANIMATION
+// ================================================================
+
+class LoadingDots extends StatefulWidget {
+  const LoadingDots({super.key});
+
+  @override
+  State<LoadingDots> createState() =>
+      _LoadingDotsState();
+}
+
+class _LoadingDotsState extends State<LoadingDots>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(
+      vsync: this,
+
+      duration: const Duration(
+        milliseconds: 900,
+      ),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 28,
+      height: 28,
+
+      child: AnimatedBuilder(
+        animation: controller,
+
+        builder: (context, child) {
+          return CustomPaint(
+            painter: LoadingDotsPainter(
+              controller.value,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+// ================================================================
+// LOADING DOTS PAINTER
+// ================================================================
+
+class LoadingDotsPainter extends CustomPainter {
+  final double progress;
+
+  LoadingDotsPainter(this.progress);
+
+  @override
+  void paint(
+    Canvas canvas,
+    Size size,
+  ) {
+    final Paint paint = Paint()
+      ..color = const Color(0xFFFFB333)
+      ..style = PaintingStyle.fill;
+
+    final double centerX =
+        size.width / 2;
+
+    final double centerY =
+        size.height / 2;
+
+    // Distance from center
+    const double radius = 8;
+
+    // Four dots
+    const int dotCount = 4;
+
+    for (int i = 0; i < dotCount; i++) {
+      // Each dot is 90 degrees apart
+      final double angle =
+          (2 * pi / dotCount) * i +
+          (progress * 2 * pi);
+
+      final double x =
+          centerX + cos(angle) * radius;
+
+      final double y =
+          centerY + sin(angle) * radius;
+
+      // Slightly smaller dots
+      canvas.drawCircle(
+        Offset(x, y),
+        2.3,
+        paint,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(
+    covariant LoadingDotsPainter oldDelegate,
+  ) {
+    return oldDelegate.progress != progress;
+  }
+}
