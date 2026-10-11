@@ -81,6 +81,40 @@ class _DashboardScreenState extends State<DashboardScreen> {
               icon: const Icon(Icons.face, color: Colors.white, size: 26),
             ),
 
-        ]
+            Stack(
+              alignment: Alignment.center,
+
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.notifications_none_rounded,
+                    color: Colors.white,
+                    size: 26,
+                  ),
+                ),
+
+                Positioned(
+                  top: 12,
+                  right: 12,
+
+                  child: Container(
+                    width: 9,
+                    height: 9,
+
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(width: 8),
+
+        ],
+        ),
+    ),
 
 }
