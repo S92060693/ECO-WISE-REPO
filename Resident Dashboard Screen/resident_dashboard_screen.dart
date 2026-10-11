@@ -19,6 +19,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final Color primaryYellow = const Color(0xFFFFB333);
   final Color cardBackgroundColor = const Color(0xFFECECEC);
 
+
+    // ============================================================
+  // CATEGORIES DATA
+  // ============================================================
+
+  final List<Map<String, String>> categories = [
+    {'title': 'Organic', 'iconPath': 'assets/images/organic.png'},
+    {'title': 'Paper', 'iconPath': 'assets/images/paper.png'},
+    {'title': 'Plastic', 'iconPath': 'assets/images/plastic.png'},
+    {'title': 'Glass', 'iconPath': 'assets/images/glass.png'},
+    {'title': 'Metal', 'iconPath': 'assets/images/metal.png'},
+    {'title': 'Electronic', 'iconPath': 'assets/images/electronic.png'},
+    {'title': 'Textile', 'iconPath': 'assets/images/textile.png'},
+    {'title': 'Hazardous', 'iconPath': 'assets/images/hazardous.png'},
+  ];
+
+
   // ============================================================
   // BUILD
   // ============================================================
@@ -112,9 +129,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
 
             const SizedBox(width: 8),
-
         ],
         ),
     ),
+
+    // ==========================================================
+      // BODY
+      // ==========================================================
+      body: SafeArea(child: _buildSelectedScreen()),
 
 }
