@@ -505,6 +505,176 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                 ),
 
+                // ======================================================
+        // BANNER 2
+        // ======================================================
+
+          Container(
+            decoration: BoxDecoration(
+              color: cardBackgroundColor,
+
+              borderRadius: BorderRadius.circular(12),
+            ),
+
+            clipBehavior: Clip.antiAlias,
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+
+              children: [
+                // ================================================
+                // BANNER IMAGE
+                // ================================================
+
+                SizedBox(
+                  height: 165,
+
+                  child: Stack(
+                    fit: StackFit.expand,
+
+                    children: [
+                      Image.asset(
+                        'assets/images/banner_bg.png',
+
+                        fit: BoxFit.cover,
+
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(color: Colors.black);
+                        },
+                      ),
+
+                      Container(color: Colors.black.withValues(alpha: 0.4)),
+
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+
+                          mainAxisAlignment: MainAxisAlignment.center,
+
+                          children: [
+                            Text(
+                              "DON'T SET ON FIRE",
+
+                              style: TextStyle(
+                                color: primaryYellow,
+
+                                fontSize: 18,
+
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            const SizedBox(height: 3),
+
+                            const Text(
+                              'WE WILL COME AND PICK UP THE TRASH',
+
+                              style: TextStyle(
+                                color: Colors.white,
+
+                                fontSize: 12,
+
+                                fontWeight: FontWeight.w500,
+
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            Image.asset(
+                              'assets/images/eco_wise_white_logo.png',
+
+                              height: 32,
+
+                              fit: BoxFit.contain,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // ================================================
+                // DESCRIPTION
+                // ================================================
+                Padding(
+                  padding: const EdgeInsets.all(12),
+
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+
+                    children: [
+                      const Text(
+                        'Burning waste pollutes the air and harms our health. Dispose of garbage safely and keep our environment clean.',
+
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black87,
+                          height: 1.35,
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      SizedBox(
+                        height: 36,
+
+                        child: ElevatedButton(
+                          onPressed: onMoreDetails,
+
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryGreen,
+
+                            foregroundColor: Colors.white,
+
+                            elevation: 0,
+
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+
+                            children: [
+                              Text(
+                                'More',
+
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+
+                              SizedBox(width: 4),
+
+                              Icon(
+                                Icons.north_east,
+
+                                size: 14,
+
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 10),
+
                 // ================================================
                 // DESCRIPTION
                 // ================================================
