@@ -65,6 +65,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
         .showSnackBar(const SnackBar(content: Text('More details selected')));
   }
 
+    // ============================================================
+  // BOTTOM NAVIGATION
+  // ============================================================
+
+  void onBottomNavigationTap(int index) {
+    setState(() {
+      selectedBottomNavIndex = index;
+    });
+  }
+
 
   // ============================================================
   // BUILD
@@ -505,5 +515,67 @@ class _DashboardScreenState extends State<DashboardScreen> {
       )
     )
   }
+  }
+
+  // ============================================================
+  // ACCOUNT SCREEN
+  // ============================================================
+
+  Widget _buildAccountScreen() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+
+      child: Column(
+        children: [
+          // ======================================================
+          // PROFILE
+          // ======================================================
+
+          const SizedBox(height: 20),
+
+          CircleAvatar(
+            radius: 50,
+
+            backgroundColor: cardBackgroundColor,
+
+            child: Icon(Icons.person, size: 60, color: primaryGreen),
+          ),
+
+          const SizedBox(height: 15),
+
+          const Text(
+            'Resident',
+
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+
+          const SizedBox(height: 5),
+
+          const Text(
+            'resident',
+
+            style: TextStyle(fontSize: 14, color: Colors.grey),
+          ),
+
+          const SizedBox(height: 30),
+
+          // ======================================================
+          // ACCOUNT OPTIONS
+          // ======================================================
+          _accountOption(icon: Icons.person_outline, title: 'My Profile'),
+
+          _accountOption(
+            icon: Icons.notifications_none,
+            title: 'Notifications',
+          ),
+
+          _accountOption(icon: Icons.settings_outlined, title: 'Settings'),
+
+          _accountOption(icon: Icons.help_outline, title: 'Help & Support'),
+
+          _accountOption(icon: Icons.logout, title: 'Logout', isLogout: true),
+        ],
+      ),
+    );
   }
 }
