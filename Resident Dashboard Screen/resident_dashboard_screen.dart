@@ -75,4 +75,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
         ),
 
+        actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.face, color: Colors.white, size: 26),
+            ),
+
+        ]
+
 }
