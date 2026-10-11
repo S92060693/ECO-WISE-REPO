@@ -517,6 +517,45 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
   }
 
+   // ============================================================
+  // LIVE MAP SCREEN
+  // ============================================================
+
+  Widget _buildLiveMapScreen() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+
+        children: [
+          Icon(Icons.map_outlined, size: 80, color: primaryGreen),
+
+          const SizedBox(height: 16),
+
+          const Text(
+            'Live Map',
+
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          const Text(
+            'Track garbage collection vehicles\nin real time.',
+
+            textAlign: TextAlign.center,
+
+            style: TextStyle(fontSize: 15, color: Colors.grey),
+          ),
+        ],
+      ),
+    );
+  }
+
+
   // ============================================================
   // ACCOUNT SCREEN
   // ============================================================
