@@ -359,8 +359,45 @@ class _SignupScreenState extends State<SignupScreen> {
 
             const SizedBox(height: 32),
 
+                Text(
+              isResident ? 'Resident Sign Up' : 'Truck Driver Sign Up',
+              style: const TextStyle(
+                fontSize: 35,
+                fontWeight: FontWeight.bold,
+                color: primaryGreen,
+              ),
+            ),
 
-            
+            const SizedBox(height: 8),
+
+            const Text(
+              'Please Fill this Form',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 22),
+
+            // USERNAME
+            _buildTextField(
+              controller: usernameController,
+              hint: 'Username',
+              icon: Icons.person_outline,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter your username';
+                }
+                if (value.trim().length < 3) {
+                  return 'Username must contain at least 3 characters';
+                }
+                return null;
+              },
+            ),
+
+
 
           ]
         )
