@@ -397,6 +397,32 @@ class _SignupScreenState extends State<SignupScreen> {
               },
             ),
 
+            // MOBILE NUMBER
+            const SizedBox(height: 17),
+            _buildTextField(
+              controller: mobileController,
+              hint: 'Mobile Number',
+              icon: Icons.phone_android_outlined,
+              keyboardType: TextInputType.phone,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter your mobile number';
+                }
+
+                final mobile = value.replaceAll(
+                  RegExp(r'[\s+-]'),
+                  '',
+                );
+
+                // Accepts Sri Lankan 07XXXXXXXX or 947XXXXXXXX.
+                if (!RegExp(r'^(?:07[0-9]{8}|947[0-9]{8})$')
+                    .hasMatch(mobile)) {
+                  return 'Enter a valid mobile number';
+                }
+
+                return null;
+              },
+            ),
 
 
           ]
