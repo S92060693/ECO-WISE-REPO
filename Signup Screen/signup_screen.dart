@@ -18,6 +18,54 @@ class _SignupScreenState extends State<SignupScreen> {
   static const Color backgroundColor = Color(0xFFEEEEEE);
   static const Color unselectedColor = Color(0xFFD9D9D9);
 
+ // ============================================================
+  // SIGNUP STATE
+  // ============================================================
+
+  int currentStep = 0;
+
+  // Only one account type can be selected.
+  String? selectedRole;
+
+  final _formKey = GlobalKey<FormState>();
+
+  bool obscurePassword = true;
+  bool obscureConfirmPassword = true;
+  bool isSubmitting = false;
+
+  // ============================================================
+  // TEXT CONTROLLERS
+  // ============================================================
+
+  final usernameController = TextEditingController();
+  final addressController = TextEditingController();
+  final nicController = TextEditingController();
+  final serviceIdController = TextEditingController();
+  final mobileController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    usernameController.dispose();
+    addressController.dispose();
+    nicController.dispose();
+    serviceIdController.dispose();
+    mobileController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
+  // ============================================================
+  // SELECT ACCOUNT TYPE
+  // ============================================================
+
+  void selectRole(String role) {
+    setState(() {
+      selectedRole = role;
+    });
+  }
 
  // ============================================================
   // NEXT BUTTON
@@ -38,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
       currentStep = 1;
     });
   }
-  
+
   // ============================================================
   // MAIN UI
   // ============================================================
