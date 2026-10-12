@@ -397,6 +397,22 @@ class _SignupScreenState extends State<SignupScreen> {
               },
             ),
 
+            // RESIDENT ADDRESS
+            if (isResident) ...[
+              const SizedBox(height: 17),
+              _buildTextField(
+                controller: addressController,
+                hint: 'Address',
+                icon: Icons.location_on_outlined,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter your address';
+                  }
+                  return null;
+                },
+              ),
+            ],
+
             // MOBILE NUMBER
             const SizedBox(height: 17),
             _buildTextField(
