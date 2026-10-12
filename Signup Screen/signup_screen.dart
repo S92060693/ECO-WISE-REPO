@@ -330,6 +330,43 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  // ============================================================
+  // STEP 2: RESIDENT / TRUCK DRIVER FORM
+  // ============================================================
+
+  Widget _buildSignupForm() {
+    final bool isResident = selectedRole == 'Resident';
+
+    return Container(
+      key: ValueKey('signupForm_$selectedRole'),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 19,
+        vertical: 28,
+      ),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: _buildLogo(fontSize: 34),
+            ),
+
+            const SizedBox(height: 32),
+
+
+            
+
+          ]
+        )
+      )
+    )
+  }
 
 
 }
