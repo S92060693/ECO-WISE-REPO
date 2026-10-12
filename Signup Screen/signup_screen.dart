@@ -548,7 +548,27 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(height: 28),
 
 
-          ]
+            const SizedBox(height: 22),
+
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    currentStep = 0;
+                  });
+                },
+                child: const Text(
+                  'Change Account Type',
+                  style: TextStyle(
+                    color: primaryGreen,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+
+            _buildLoginText(),
+          ],
         )
       )
     )
