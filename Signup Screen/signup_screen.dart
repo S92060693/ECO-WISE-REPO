@@ -437,6 +437,22 @@ class _SignupScreenState extends State<SignupScreen> {
               },
             ),
 
+            // TRUCK DRIVER SERVICE ID
+            if (!isResident) ...[
+              const SizedBox(height: 17),
+              _buildTextField(
+                controller: serviceIdController,
+                hint: 'Service Identity Number',
+                icon: Icons.assignment_ind_outlined,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter your service identity number';
+                  }
+                  return null;
+                },
+              ),
+            ],
+
             // MOBILE NUMBER
             const SizedBox(height: 17),
             _buildTextField(
