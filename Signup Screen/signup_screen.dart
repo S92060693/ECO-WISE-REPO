@@ -511,6 +511,42 @@ class _SignupScreenState extends State<SignupScreen> {
               },
             ),
 
+            // CONFIRM PASSWORD
+            const SizedBox(height: 17),
+            _buildTextField(
+              controller: confirmPasswordController,
+              hint: 'Confirm Password',
+              icon: Icons.lock_reset_outlined,
+              obscureText: obscureConfirmPassword,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    obscureConfirmPassword =
+                        !obscureConfirmPassword;
+                  });
+                },
+                icon: Icon(
+                  obscureConfirmPassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: Colors.grey
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please confirm your password';
+                }
+
+                if (value != passwordController.text) {
+                  return 'Passwords do not match';
+                }
+
+                return null;
+              },
+            ),
+
+            const SizedBox(height: 28),
+
 
           ]
         )
