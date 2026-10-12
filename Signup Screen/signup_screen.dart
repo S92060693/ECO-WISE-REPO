@@ -413,6 +413,30 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ],
 
+            // NIC NUMBER
+            const SizedBox(height: 17),
+            _buildTextField(
+              controller: nicController,
+              hint: 'NIC Number',
+              icon: Icons.badge_outlined,
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'Please enter your NIC number';
+                }
+
+                final nic = value.trim().toUpperCase();
+                final validNic = RegExp(
+                  r'^(?:[0-9]{9}[VX]|[0-9]{12})$',
+                ).hasMatch(nic);
+
+                if (!validNic) {
+                  return 'Enter a valid NIC number';
+                }
+
+                return null;
+              },
+            ),
+
             // MOBILE NUMBER
             const SizedBox(height: 17),
             _buildTextField(
