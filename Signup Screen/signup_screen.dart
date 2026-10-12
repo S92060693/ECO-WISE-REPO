@@ -106,7 +106,132 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
+  // ============================================================
+  // STEP 1: RESIDENT / TRUCK DRIVER SELECTION
+  // ============================================================
 
+  Widget _buildRoleSelection() {
+    return Container(
+      key: const ValueKey('roleSelection'),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        horizontal: 19,
+        vertical: 36,
+      ),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 30),
+
+          _buildLogo(fontSize: 36),
+
+          const SizedBox(height: 45),
+
+          const Text(
+            'Sign Up',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 55),
+
+          // RESIDENT OPTION
+          _buildRoleButton(
+            title: 'Resident',
+            icon: Icons.person_outline,
+            role: 'Resident',
+          ),
+
+          const SizedBox(height: 20),
+
+          // TRUCK DRIVER OPTION
+          _buildRoleButton(
+            title: 'Truck Driver',
+            icon: Icons.local_shipping_outlined,
+            role: 'Truck Driver',
+          ),
+
+          const SizedBox(height: 55),
+
+          // NEXT BUTTON
+          _buildPrimaryButton(
+            title: 'Next',
+            onPressed: goToForm,
+          ),
+
+          const SizedBox(height: 25),
+
+          _buildLoginText(),
+
+          const SizedBox(height: 10),
+        ],
+      ),
+    );
+  }
+
+  // ============================================================
+  // ROLE SELECTION BUTTON
+  // ============================================================
+
+  Widget _buildRoleButton({
+    required String title,
+    required IconData icon,
+    required String role,
+  }) {
+    final bool isSelected = selectedRole == role;
+
+    return InkWell(
+      onTap: () => selectRole(role),
+      borderRadius: BorderRadius.circular(15),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: double.infinity,
+        height: 65,
+        decoration: BoxDecoration(
+          color: isSelected ? primaryYellow : unselectedColor,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: isSelected ? primaryGreen : Colors.transparent,
+            width: 1.5,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 23,
+              color: isSelected ? primaryGreen : Colors.black,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              title,
+              style: TextStyle(
+                color: isSelected ? primaryGreen : Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            if (isSelected) ...[
+              const SizedBox(width: 10),
+              const Icon(
+                Icons.check_circle,
+                color: primaryGreen,
+                size: 20,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
 
 
 
