@@ -87,6 +87,42 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
+ // ============================================================
+  // SUBMIT SIGNUP FORM
+  // ============================================================
+
+  Future<void> submitSignup() async {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    FocusScope.of(context).unfocus();
+
+    setState(() {
+      isSubmitting = true;
+    });
+
+    // This delay is only a demonstration of a loading state.
+    await Future.delayed(const Duration(milliseconds: 800));
+
+    if (!mounted) return;
+
+    setState(() {
+      isSubmitting = false;
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          '${selectedRole!} form completed successfully!',
+        ),
+        backgroundColor: primaryGreen,
+      ),
+    );
+
+    // Navigate to the login screen after successful registration.
+  }
+
   // ============================================================
   // MAIN UI
   // ============================================================
@@ -547,6 +583,12 @@ class _SignupScreenState extends State<SignupScreen> {
 
             const SizedBox(height: 28),
 
+            // SUBMIT BUTTON
+            _buildPrimaryButton(
+              title: isSubmitting ? 'Please wait...' : 'Submit',
+              isLoading: isSubmitting,
+              onPressed: isSubmitting ? null : submitSignup,
+            ),
 
             const SizedBox(height: 22),
 
@@ -574,5 +616,162 @@ class _SignupScreenState extends State<SignupScreen> {
     )
   }
 
+  // ============================================================
+  // REUSABLE INPUT FIELD
+  // ============================================================
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hint,
+    required IconData icon,
+    String? Function(String?)? validator,
+    TextInputType keyboardType = TextInputType.text,
+    bool obscureText = false,
+    Widget? suffixIcon,
+  }) {
+    return TextFormField(
+      controller: controller,
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      style: const TextStyle(
+        fontSize: 14,
+        color: Colors.black,
+      ),
+      decoration: InputDecoration(
+        hintText: hint,
+        hintStyle: const TextStyle(
+          fontSize: 14,
+          color: Colors.grey,
+        ),
+        prefixIcon: Icon(
+          icon,
+          color: primaryGreen,
+          size: 21,
+        ),
+        suffixIcon: suffixIcon,
+        filled: true,
+        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: 17,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: primaryGreen,
+            width: 1.8,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: primaryGreen,
+            width: 1.8,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: primaryYellow,
+            width: 2.5,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 1.5,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 2,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ============================================================
+  // PRIMARY BUTTON
+  // ============================================================
+
+  Widget _buildPrimaryButton({
+    required String title,
+    required VoidCallback? onPressed,
+    bool isLoading = false,
+  }) {
+    return SizedBox(
+      width: double.infinity,
+      height: 51,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primaryGreen,
+          foregroundColor: primaryYellow,
+          disabledBackgroundColor: primaryGreen.withValues(alpha: 0.7),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(14),
+          ),
+          elevation: 0,
+        ),
+        child: isLoading
+            ? const SizedBox(
+                width: 23,
+                height: 23,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.5,
+                  color: primaryYellow,
+                ),
+              )
+            : Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+      ),
+    );
+  }
+
+  // ============================================================
+  // LOGIN LINK
+  // ============================================================
+
+  Widget _buildLoginText() {
+    return Center(
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          const Text(
+            'Already have an Account? ',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 14,
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'Login',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
 }
