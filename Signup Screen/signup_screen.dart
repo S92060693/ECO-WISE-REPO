@@ -480,6 +480,37 @@ class _SignupScreenState extends State<SignupScreen> {
               },
             ),
 
+            // PASSWORD
+            const SizedBox(height: 17),
+            _buildTextField(
+              controller: passwordController,
+              hint: 'Password',
+              icon: Icons.lock_outline,
+              obscureText: obscurePassword,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    obscurePassword = !obscurePassword;
+                  });
+                },
+                icon: Icon(
+                  obscurePassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: Colors.grey
+                ),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter a password';
+                }
+                if (value.length < 6) {
+                  return 'Password must contain at least 6 characters';
+                }
+                return null;
+              },
+            ),
+
 
           ]
         )
