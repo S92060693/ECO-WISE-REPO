@@ -19,6 +19,55 @@ class _SignupScreenState extends State<SignupScreen> {
   static const Color unselectedColor = Color(0xFFD9D9D9);
 
 
+ // ============================================================
+  // NEXT BUTTON
+  // ============================================================
+
+  void goToForm() {
+    if (selectedRole == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please select Resident or Truck Driver.'),
+          backgroundColor: primaryGreen,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      currentStep = 1;
+    });
+  }
+  
+  // ============================================================
+  // MAIN UI
+  // ============================================================
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 19,
+              vertical: 20,
+            ),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 430),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: currentStep == 0
+                    ? _buildRoleSelection()
+                    : _buildSignupForm(),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   // ============================================================
   // ECO WISE LOGO
